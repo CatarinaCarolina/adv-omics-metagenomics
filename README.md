@@ -1,1 +1,1 @@
-# biosb-metagenomics
+# SSB57306 Advanced Omics Computational Metagenomics
