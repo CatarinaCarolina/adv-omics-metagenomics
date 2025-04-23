@@ -1,8 +1,8 @@
-site_name: Biosb Computational Metagenomics
+site_name: SSB57306 Advanced Omics Computational Metagenomics
 
 # Repository
-repo_url: https://github.com/mdehollander/biosb-metagenomics
-repo_name: biosb-metagenomics
+repo_url: https://https://github.com/CatarinaCarolina/adv-omics-metagenomics/
+repo_name: adv-omics-metagenomics
 
 # Styling
 theme:
@@ -14,15 +14,12 @@ theme:
 # Navigation
 nav:
   - Home: index.md
-  - "Day 1: Data processing":
+  - "Data processing":
     - Introduction: data-processing/intro.md
     - Quality Control: data-processing/quality-control.md
     - Assembly: data-processing/assembly.md
     - Binning: data-processing/binning.md
     - Cave expedition: data-processing/cave-expedition.md
-  - "Day 3: Functional annotation":
-    - Viromics: functional-annotation/viromes.md
-    - BGCs: functional-annotation/bgcs.md
 
 markdown_extensions:
   - footnotes
