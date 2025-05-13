@@ -11,7 +11,5 @@ microbial community it associates with in the
 rhizosphere.
 - Can you find out how the microbial community adapts?
 
-## Slides
-[:fontawesome-solid-file-pdf: Download the presentation (2022)](../assets/from_zero_to_hero.pdf){: .md-button }
-[:fontawesome-solid-file-pdf: Download the presentation (2024)](../assets/mgx_order_to_chaos.pdf){: .md-button }
+
 
