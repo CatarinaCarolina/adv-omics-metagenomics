@@ -459,7 +459,7 @@
 </ul>
 </div>
 <p>Next, we want to map the reads back on the assembly to see how the coverage for each contig changed across samples:</p>
-<pre><code>bwa mem precomputed/assembly/final.contigs.fa \
+<pre><code>bwa mem /data/precomputed/assembly/final.contigs.fa \
         reads/sample_0.fq.gz \
         -o bam/sample_0.bam \
         -t 32
@@ -470,17 +470,17 @@
 <p>Feel free to inspect the content as done before, do you notice something particular?</p>
 </div>
 <p>Now, many tools need bam files to be sorted in order to work. Therefore, we will use samtools sort to do that.</p>
-<pre><code>samtools sort precomputed/bam/sample_0.bam -o bam/sample_0.sorted.bam
+<pre><code>mkdir bam
+samtools sort /data/precomputed/bam/sample_0.bam -o bam/sample_0.sorted.bam
 </code></pre>
 <p>The sorted bam files can also be index, so other tools can quickly extract alignments</p>
-<pre><code>for bam in *.sorted.bam; do samtools index $bam; done
+<pre><code>for bam in bam/*.sorted.bam; do samtools index $bam; done
 </code></pre>
-<p>We can first get an idea if the different genomes can be seperated by gc-content and coverage. With <a href="https://github.com/DRL/blobtools">Blobtools</a> the coverage and gc-content of the contigs can be plotted and visualy bins or blobs can be detected</p>
+<p>We can first get an idea if the different genomes can be separated by gc-content and coverage. With <a href="https://github.com/DRL/blobtools">Blobtools</a> the coverage and gc-content of the contigs can be plotted and visualy bins or blobs can be detected</p>
 <pre><code>wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
 tar zxvf taxdump.tar.gz
-blobtools nodesdb --nodes db/nodes.dmp --names db/names.dmp
 
-blobtools create -i data/precomputed/assembly/final.contigs.fa -b data/precomputed/bam/sample_0.sorted.bam -b data/precomputed/bam/sample_1.sorted.bam -b data/precomputed/bam/sample_2.sorted.bam -b data/precomputed/bam/sample_3.sorted.bam -b data/precomputed/bam/sample_4.sorted.bam -b data/precomputed/bam/sample_5.sorted.bam
+blobtools create -i /data/precomputed/assembly/final.contigs.fa -b bam/sample_0.sorted.bam -b /data/precomputed/bam/sample_1.sorted.bam -b /data/precomputed/bam/sample_2.sorted.bam -b /data/precomputed/bam/sample_3.sorted.bam -b /data/precomputed/bam/sample_4.sorted.bam -b /data/precomputed/bam/sample_5.sorted.bam --nodes nodes.dmp --names names.dmp --db nodesDB.txt
 
 blobtools view -i blobDB.json
 blobtools plot -i blobDB.json
@@ -490,19 +490,19 @@ blobtools plot -i blobDB.json
 <p>Take a look at the <code>blobDB.json.bestsum.phylum.p8.span.100.blobplot.bam0.png</code> file. How many large genome bins can you detect? How is this for the other files?</p>
 </div>
 <p>Now, we will create a depth table, which can be used by binning tools to identify genomic entities (contigs, here) that have similar coverage across samples.</p>
-<pre><code>jgi_summarize_bam_contig_depths --outputDepth depth.tsv bam/sample_0.sorted.bam bam/sample_1.sorted.bam bam/sample_2.sorted.bam bam/sample_3.sorted.bam bam/sample_4.sorted.bam bam/sample_5.sorted.bam
+<pre><code>jgi_summarize_bam_contig_depths --outputDepth depth.tsv /data/precomputed/bam/sample_0.sorted.bam /data/precomputed/bam/sample_1.sorted.bam /data/precomputed/bam/sample_2.sorted.bam /data/precomputed/bam/sample_3.sorted.bam /data/precomputed/bam/sample_4.sorted.bam /data/precomputed/bam/sample_5.sorted.bam
 </code></pre>
 <p>Now, we can run metabat to find our bins:</p>
-<pre><code>metabat2 -a depth.tsv -i precomputed/assembly/final.contigs.fa.gz -o binned_genomes/bin
+<pre><code>metabat2 -a depth.tsv -i /data/precomputed/assembly/final.contigs.fa.gz -o binned_genomes/bin
 </code></pre>
 <p>After this is done, we will now try and figure out how good are our bins, we will use checkm. First we create a set of lineage specific markers for bacterial genomes:</p>
 <pre><code>checkm taxon_set domain Bacteria checkm_taxon_bacteria
 </code></pre>
 <p>Now, it’s time to find out the completeness of your binned genomes:</p>
-<pre><code>checkm analyze -x fa checkm_taxon binned_genomes/ checkm_bac/
+<pre><code>checkm analyze -x fa checkm_taxon_bacteria binned_genomes/ checkm_bac/
 </code></pre>
 <p>This created the checkm_bac/ folder with the information on our bins, to interpret the results we use checkm qa:</p>
-<pre><code>checkm qa checkm_taxon checkm_bac/
+<pre><code>checkm qa checkm_taxon_bacteria checkm_bac/
 </code></pre>
 <div class="admonition question exercise">
 <p class="admonition-title">Question</p>
@@ -513,7 +513,7 @@ blobtools plot -i blobDB.json
 </code></pre>
 <p>This command will take some time but it will give us a detailed breakdown of each genome predicted taxonomy and completeness.</p>
 <p>With the bam files, a coverage file can also be created with the tool <a href="https://github.com/wwood/CoverM">CoverM</a></p>
-<pre><code>coverm contig -b data/precomputed/bam/sample_*.sorted.bam -m mean -t 16 -o coverage.tsv
+<pre><code>coverm contig -b /data/precomputed/bam/sample_*.sorted.bam -m mean -t 16 -o coverage.tsv
 </code></pre>
 
 
@@ -535,7 +535,7 @@ blobtools plot -i blobDB.json
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2022 14:58:50">October 7, 2022</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2025 12:07:20">May 14, 2025</span>
   </span>
 
     
@@ -546,11 +546,12 @@ blobtools plot -i blobDB.json
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
+        <a href="mailto:catarina.salesesantosloureiro@wur.nl">Catarina Loureiro</a>, 
         <a href="mailto:m.dehollander@nioo.knaw.nl">Mattias de Hollander</a>
     </nav>
   </span>
