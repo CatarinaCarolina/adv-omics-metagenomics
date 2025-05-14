@@ -13,13 +13,13 @@ This command would take around 50 minutes to complete, to speed up things we pre
 
 Feel free to inspect the contents of the folder by using
 
-    ls -lh precomputed/assembly/
+    ls -lh /data/precomputed/assembly/
 
 You will notice the final.contigs.fa file which contains the assembly
 
 Now, we want to find out how well or poorly our assembly went. For this, we use quast, a tool to generate an assembly report.
 
-    quast precomputed/assembly/final.contigs.fa -o quast/
+    quast /data/precomputed/assembly/final.contigs.fa -o quast/
 
 Then, we inspect the output from quast. 
 
