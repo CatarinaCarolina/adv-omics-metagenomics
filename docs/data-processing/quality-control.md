@@ -13,9 +13,23 @@ In order to get access to all the tools we need for the tutorial, we use the [Co
 
 ### Navigating the file system
 
-In the Nuvolos system, the data is stored in a different way, please make sure to add the following at the beginning of all the data file paths for the _entire_ tutorial.
+In the Nuvolos system, the data is stored in a different way, please make sure to add the following at the beginning of all the /data file paths for the _entire_ tutorial.
 
     /space_mounts/omics_data/
+
+so for example the command
+
+    zcat /data/reads/sample_0.fq.gz | head
+
+needs to become
+
+    zcat  /space_mounts/omics_data/data/reads/sample_0.fq.gz | head
+ 
+but the command
+
+    mkdir fastqc_untrimmed_reads
+
+remains unchanged (since its not dealing with any of the /data files)
 
 
 ## FastQ format
