@@ -3,11 +3,17 @@
     - Interpret FastQC reports
     - Create high quality reads by trimmign and filtering with FastP and BBduk
 
+## Activating the conda environment (for Nuvolos only)
+
+In order to get access to all the tools we need for the tutorial, we use the [Conda environment manager](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+
+    conda activate metagenomics
+
 ## FastQ format
 
 First let's take a look at the data
 
-    zcat /data/reads/sample_0.fq.gz | head
+    zcat /space_mounts/omics_data/data/reads/sample_0.fq.gz | head
 
 
 ??? done "The output looks like this"
