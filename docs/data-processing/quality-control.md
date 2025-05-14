@@ -149,7 +149,6 @@ Alternative trimming with bbduk. Compare poly-g tail filtering, adapter trimming
 
 !!! question "Exercise" 
     - How many PhiX sequences are detected?
-    - From which samples?
     - Can you confirm the sequences are PhiX?
     - The input data was simulated without adding any PhiX. How could there still PhiX sequences being detected?
 
