@@ -27,9 +27,9 @@ Username is <first_name>_<last_name> and password is pw4<first_name>, all in
 lowercase. Any spaces an dashes in names are represented with low dashes.
 
 Examples:
-• rens_holmer, pw4rens
-• marnix_medema, pw4marnix
-• mattias_de_hollander, pw4mattias
+- rens_holmer, pw4rens
+- marnix_medema, pw4marnix
+- mattias_de_hollander, pw4mattias
 
 _In theory this makes it easy to find out another person’s credentials, we trust
 the participants to not take advantage of this._
