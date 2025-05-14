@@ -27,8 +27,8 @@ lowercase. Any spaces an dashes in names are represented with low dashes.
 
 Examples:
 
-- rens_holmer, pw4rens
-- marnix_medema, pw4marnix
+- rens.holmer, pw4rens
+- marnix.medema, pw4marnix
 
 _In theory this makes it easy to find out another person’s credentials, we trust
 the participants to not take advantage of this._
