@@ -15,8 +15,7 @@ rhizosphere.
 
 In this course we use a jupyterhub setup to provide access to a linux environment,
 and python and R notebooks. Students and instructors have individual
-accounts and can log in to the jupyterhub at https://www.bioinformatics.nl/
-biosb_metagenomics.
+accounts and can log in to the [jupyterhub](https://www.bioinformatics.nl/biosb_metagenomics).
 
 ### Logging in
 
