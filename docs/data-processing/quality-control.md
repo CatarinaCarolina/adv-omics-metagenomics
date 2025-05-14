@@ -31,6 +31,7 @@ but the command
 
 remains unchanged (since its not dealing with any of the /data files)
 
+----------------------------------------------------------------------------------------
 
 ## FastQ format
 

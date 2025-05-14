@@ -23,7 +23,7 @@ biosb_metagenomics.
 Every participant has an individual account with username/password based on
 first n ame a nd l ast n ame f ollowing a fi xed sc heme. 
 
-Username is <first_name>_<last_name> and password is pw4<first_name>, all in
+Username is <first_name>.<last_name> and password is pw4<first_name>, all in
 lowercase. Any spaces an dashes in names are represented with low dashes.
 
 Examples:
