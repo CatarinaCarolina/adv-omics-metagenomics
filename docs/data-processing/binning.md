@@ -19,7 +19,7 @@ Now, many tools need bam files to be sorted in order to work. Therefore, we will
     mkdir bam
     samtools sort /data/precomputed/bam/sample_0.bam -o bam/sample_0.sorted.bam
 
-The sorted bam files can also be index, so other tools can quickly extract alignments
+The sorted bam files can also be indexed, so other tools can quickly extract alignments:
 
     for bam in bam/*.sorted.bam; do samtools index $bam; done
 
