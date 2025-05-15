@@ -1,14 +1,14 @@
 !!! important "Learning objectives"
     - Extract individual genomes from an assembly
 
-Next, we want to map the reads back on the assembly to see how the coverage for each contig changed across samples:
+Next, we would want to map the reads back on the assembly to see how the coverage for each contig changed across samples such as below. Here, we won’t run it for all samples to save time and space.
 
     bwa mem /data/precomputed/assembly/final.contigs.fa \
             reads/sample_0.fq.gz \
             -o bam/sample_0.bam \
             -t 32
 
-Here, we won’t run it for all samples to save time and space, you will find the bam files in the precomputed/bam/ folder. 
+You will find the bam files in the precomputed/bam/ folder. 
 
 !!! question Exercise
 

@@ -20,7 +20,7 @@ accounts and can log in to the [jupyterhub](https://www.bioinformatics.nl/biosb_
 ### Logging in
 
 Every participant has an individual account with username/password based on
-first n ame a nd l ast n ame f ollowing a fi xed sc heme. 
+first name and last name following a fixed scheme. 
 
 Username is first_name.last_name and password is pw4first_name, all in
 lowercase. Any spaces an dashes in names are represented with low dashes.

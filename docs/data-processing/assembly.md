@@ -2,7 +2,7 @@
     - Being able to create an assembly with megahit
     - Assess the quality of the assembly
 
-Now that our reads are quality trimmed and ready to go is time to start the assembly. We can use [megahit](https://github.com/voutcn/megahit):
+Now that our reads are quality trimmed and ready to go is time to start the assembly. We could use [megahit](https://github.com/voutcn/megahit) as follows, but we will not run this during the tutorial:
 
     megahit --12 sample_0.nophix.fastq.gz,sample_1.nophix.fastq.gz,sample_2.nophix.fastq.gz,sample_3.nophix.fastq.gz,sample_4.nophix.fastq.gz,sample_5.nophix.fastq.gz \
             -t 16 \
